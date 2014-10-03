@@ -6,6 +6,18 @@ var stringifyJSON = function(obj) {
   // your code goes here
 
   var isArray = Array.isArray(obj);
+ // console.log(obj.length=== undefined)
+  if ( typeof(obj)==='string'){
+  	return '"' +obj.toString() +'"'
+  }
+  if (obj === null){
+  	return 'null'
+  }
+
+  if ( !isArray & (obj.length == undefined) ){
+  	//console.log('doest hiet')
+  	return obj.toString();
+  }
   var str = (isArray? '[' : '{');
   var keys = Object.keys(obj);
   if (isArray){
