@@ -4,29 +4,39 @@
 // but you don't so you're going to write it from scratch:
 var stringifyJSON = function(obj) {
   // your code goes here
-
-  var isArray = Array.isArray(obj);
- // console.log(obj.length=== undefined)
-  if ( typeof(obj)==='string'){
-  	return '"' +obj.toString() +'"'
+  if (obj === undefined){
+  	return undefined
   }
   if (obj === null){
   	return 'null'
   }
-
-  if ( !isArray & (obj.length == undefined) ){
-  	//console.log('doest hiet')
+  if (typeof(obj) ==="number" || obj === '' || typeof(obj) === "boolean"){
   	return obj.toString();
   }
+  if ( typeof(obj)==='string'  ){
+  	return '"' +obj.toString() +'"'
+  }
+
+  var isArray = Array.isArray(obj);
+  /*
+  if ( !isArray & (obj.length == undefined) ){
+  	return obj.toString();
+  }*/
+
   var str = (isArray? '[' : '{');
-  var keys = Object.keys(obj);
-  if (isArray){
-  	str += obj.toString();
-  }else{
-	for (var i =0; i< keys.length;i++){
-  	  str += '"' + keys[i] +'":"'+ obj[keys]+'"';
+  var keys = (isArray ?  true : Object.keys(obj));
+  var len = ( isArray ? obj.length : keys.length)
+
+
+  for ( var i =0 ; i< len ; i++ ){
+  	var word = (isArray ? stringifyJSON(obj[i]) : '"' + keys[i] +'":'+ stringifyJSON(obj[keys[i]]));
+  	//str += '"' + keys[i] +'":'+ stringifyJSON(obj[keys]);
+  	str += word;
+  	if (i != len-1){
+  		str+=',';
   	}
   }
+  
   str += (isArray ? ']' : '}');
   return str
 
