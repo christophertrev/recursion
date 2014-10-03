@@ -26,9 +26,13 @@ var stringifyJSON = function(obj) {
   var str = (isArray? '[' : '{');
   var keys = (isArray ?  true : Object.keys(obj));
   var len = ( isArray ? obj.length : keys.length)
-
-
+  var unJSONable = ['functions', 'undefined'];
+  if( !isArray && (obj.hasOwnProperty(unJSONable[0]) || obj.hasOwnProperty(unJSONable[1]))){
+    return '{}'
+  }
   for ( var i =0 ; i< len ; i++ ){
+
+
   	var word = (isArray ? stringifyJSON(obj[i]) : '"' + keys[i] +'":'+ stringifyJSON(obj[keys[i]]));
   	//str += '"' + keys[i] +'":'+ stringifyJSON(obj[keys]);
   	str += word;
