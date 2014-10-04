@@ -7,12 +7,19 @@
 var getElementsByClassName = function(className, startElement){
   // your code here
   //grab document
+  var results = []; 
   $startElement = ( startElement ? startElement : document.body)
   //$body = document.body;
-  console.log($startElement);
+  //console.log($startElement);
+  ($startElement.classList.contains(className) ? results.push($startElement) : false)
 
+  //get childNodes
+  var $children = $startElement.childNodes; 
+  for (var i = 0; i < $children.length; i++) {
+  	if ($children[i].nodeName !== "#text") {
+  		results.concat(getElementsByClassName(className,$children[i]));
+  	}
+  }
+  return results
 
-  //index through level to find any elements that have that class
-  //if has any more children index through those
-  //need to look through all elements in the document
 };
