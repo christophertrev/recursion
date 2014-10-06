@@ -17,7 +17,7 @@ var getElementsByClassName = function(className, startElement){
   var $children = $startElement.childNodes; 
   for (var i = 0; i < $children.length; i++) {
   	if ($children[i].nodeName !== "#text") {
-  		results.concat(getElementsByClassName(className,$children[i]));
+  		results = results.concat(getElementsByClassName(className,$children[i]));
   	}
   }
   return results
