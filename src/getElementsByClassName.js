@@ -8,7 +8,7 @@ var getElementsByClassName = function(className, startElement){
   // your code here
   //grab document
   var results = []; 
-  $startElement = ( startElement ? startElement : document.body)
+  $startElement = ( startElement ? startElement : document.body);
   //$body = document.body;
   //console.log($startElement);
   ($startElement.classList.contains(className) ? results.push($startElement) : false)
